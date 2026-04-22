@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Azeem Malik — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f7f5f2;
+      --surface:   #ffffff;
+      --border:    #e3dfd9;
+      --text:      #1a1916;
+      --muted:     #7a7572;
+      --accent:    #2d5a3d;
+      --accent-lt: #e8f0eb;
+      --serif:     'DM Serif Display', Georgia, serif;
+      --sans:      'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 242, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-of-type { border-bottom: none; }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 7rem 0 5rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 4.2rem);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.3rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-family: var(--sans);
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.18s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: #234930;
+      border-color: #234930;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      background: var(--surface);
+      border-color: #c9c4bc;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      line-height: 1.2;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-bio { color: var(--muted); }
+    .about-bio p + p { margin-top: 1rem; }
+
+    .about-details { display: flex; flex-direction: column; gap: 1.4rem; }
+
+    .detail-item { display: flex; flex-direction: column; gap: 0.2rem; }
+
+    .detail-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .detail-value { font-size: 0.95rem; font-weight: 400; }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.6rem;
+    }
+
+    .skill-chip {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.83rem;
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* ── CV ── */
+    .cv-block + .cv-block { margin-top: 2.8rem; }
+
+    .cv-block-title {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .cv-entry + .cv-entry { margin-top: 1.8rem; }
+
+    .cv-entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .cv-entry-role {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .cv-entry-date {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .cv-entry-org {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .cv-entry-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ── HACKATHONS ── */
+    .hackathon-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hackathon-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.4rem 1.6rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+
+    .hackathon-card:hover {
+      border-color: #c2bdb5;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    }
+
+    .hackathon-name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .hackathon-project {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .hackathon-badge {
+      background: var(--accent-lt);
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* ── CONTACT ── */
+    .contact-row {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.18s;
+    }
+
+    .contact-link:hover { color: var(--text); }
+
+    .contact-link svg { flex-shrink: 0; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: fadeUp 0.55s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up:nth-child(1) { animation-delay: 0.05s; }
+    .fade-up:nth-child(2) { animation-delay: 0.15s; }
+    .fade-up:nth-child(3) { animation-delay: 0.25s; }
+    .fade-up:nth-child(4) { animation-delay: 0.35s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 0 1.2rem; }
+      .container { padding: 0 1.2rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .cv-entry-header { flex-direction: column; gap: 0.1rem; }
+      .hackathon-card { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Azeem Malik</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#cv">CV</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <p class="hero-eyebrow fade-up">Mathematics &amp; Computer Science · University of Birmingham</p>
+      <h1 class="hero-name fade-up">Azeem Malik</h1>
+      <p class="hero-tagline fade-up">
+        Maths &amp; CS student, tutor, and hackathon builder. Interested in software development,
+        cloud infrastructure, and making complex ideas easy to understand.
+      </p>
+      <div class="hero-links fade-up">
+        <a href="#cv" class="btn btn-primary">View CV</a>
+        <a href="https://github.com/Azoom123" target="_blank" class="btn btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          GitHub
+        </a>
+        <a href="mailto:azeemmalik1025@gmail.com" class="btn btn-outline">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">About</p>
+        <h2 class="section-title">A bit about me</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-bio">
+          <p>
+            I'm a Mathematics and Computer Science student at the University of Birmingham,
+            with a strong background in both theoretical and applied computing. I enjoy
+            building software — from cloud-hosted databases to chess engines — and bringing
+            the same rigour to code that I bring to mathematics.
+          </p>
+          <p>
+            Alongside my studies I tutor maths and physics (KS2 to A-level), lead a Scout
+            group, and take part in hackathons and mathematical challenges whenever I can.
+          </p>
+
+          <!-- SKILLS -->
+          <div style="margin-top: 2rem;">
+            <p class="detail-label" style="margin-bottom: 0.8rem;">Technologies &amp; Languages</p>
+            <div class="skills-grid">
+              <span class="skill-chip">Python</span>
+              <span class="skill-chip">Java</span>
+              <span class="skill-chip">SQL / PostgreSQL</span>
+              <span class="skill-chip">PHP</span>
+              <span class="skill-chip">Flask</span>
+              <span class="skill-chip">Pygame</span>
+              <span class="skill-chip">AWS (EC2, RDS, S3)</span>
+              <span class="skill-chip">Docker</span>
+              <span class="skill-chip">Git</span>
+              <span class="skill-chip">Linux (Ubuntu)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-details">
+          <div class="detail-item">
+            <span class="detail-label">Location</span>
+            <span class="detail-value">Leicester, UK</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">University</span>
+            <span class="detail-value">BSc Mathematics &amp; Computer Science<br>University of Birmingham, 2025–2028</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Soft Skills</span>
+            <span class="detail-value">Communication · Leadership · Self-motivation</span>
+          </div>
+          <div class="detail-item">
+            <span class="detail-label">Open to</span>
+            <span class="detail-value">Internships &amp; collaborations</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section id="cv">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Résumé</p>
+        <h2 class="section-title">Experience &amp; Education</h2>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="cv-block">
+        <p class="cv-block-title">Projects</p>
+
+        <div class="cv-entry">
+          <div class="cv-entry-header">
+            <span class="cv-entry-role">Web Server &amp; Database Development</span>
+            <span class="cv-entry-date">Oct 2024</span>
+          </div>
+          <p class="cv-entry-desc">
+            Designed and deployed a PostgreSQL database on AWS RDS and built an EC2-hosted
+            web server communicating with it via PHP. Strengthened Linux skills and gained
+            hands-on experience with cloud infrastructure.
+          </p>
+        </div>
+
+        <div class="cv-entry">
+          <div class="cv-entry-header">
+            <span class="cv-entry-role">Chess Game</span>
+            <span class="cv-entry-date">Jun 2024</span>
+          </div>
+          <p class="cv-entry-desc">
+            Built a two-player chess game in Python using Pygame and object-oriented design.
+            Applied intermediate algorithms (binary search, matrix representation) for board
+            state management, and used sockets to connect two users for live play.
+          </p>
+        </div>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="cv-block">
+        <p class="cv-block-title">Work Experience</p>
+
+        <div class="cv-entry">
+          <div class="cv-entry-header">
+            <span class="cv-entry-role">Tutor</span>
+            <span class="cv-entry-date">2023 – Present</span>
+          </div>
+          <p class="cv-entry-org">Lote Tree Tuition · Leicester, UK</p>
+          <p class="cv-entry-desc">
+            Teaching students Maths and Physics content ranging from KS2 to A-Level.
+            Basic admin work including setting homework, tracking attendance, and responding
+            to parents and students in a professional manner. Produces 20–25 minute
+            YouTube-style video lessons covering upcoming lesson content.
+          </p>
+        </div>
+
+        <div class="cv-entry">
+          <div class="cv-entry-header">
+            <span class="cv-entry-role">Invigilator</span>
+            <span class="cv-entry-date">Sep 2024 – Apr 2025</span>
+          </div>
+          <p class="cv-entry-org">FAAS Ltd · Leicester, UK</p>
+          <p class="cv-entry-desc">
+            Supervised candidates during examinations and courses, ensuring a fair and
+            disruption-free environment and upholding examination integrity at all times.
+          </p>
+        </div>
+
+        <div class="cv-entry">
+          <div class="cv-entry-header">
+            <span class="cv-entry-role">Customer Services Assistant</span>
+            <span class="cv-entry-date">Sep 2024 – Feb 2025</span>
+          </div>
+          <p class="cv-entry-org">Co-op · Leicester, UK</p>
+          <p class="cv-entry-desc">
+            Delivered friendly and efficient customer service in a fast-paced retail
+            environment, handling transactions and supporting daily store operations.
+          </p>
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS -->
+      <div class="cv-block">
+        <p class="cv-block-title">Certifications</p>
+
+        <div class="cv-entry">
+          <div class="cv-entry-header">
+            <span class="cv-entry-role">AWS Certified Cloud Practitioner</span>
+            <span class="cv-entry-date">May 2025</span>
+          </div>
+          <p class="cv-entry-org">Amazon Web Services</p>
+          <p class="cv-entry-desc">
+            Gained a solid foundational understanding of AWS services, cloud architecture,
+            security, compliance, and best practices.
+          </p>
+        </div>
+      </div>
+
+      <!-- AWARDS -->
+      <div class="cv-block">
+        <p class="cv-block-title">Awards</p>
+
+        <div class="cv-entry">
+          <p class="cv-entry-desc" style="display:flex;flex-direction:column;gap:0.5rem;">
+            <span><strong>Intermediate Mathematical Challenge</strong> — Gold <span style="color:var(--muted);font-size:0.82rem;">(2021)</span></span>
+            <span><strong>Senior Mathematical Challenge</strong> — Gold <span style="color:var(--muted);font-size:0.82rem;">(2023)</span></span>
+            <span><strong>British Physics Olympiad, Senior Physics Challenge</strong> — Bronze <span style="color:var(--muted);font-size:0.82rem;">(2023)</span></span>
+            <span><strong>Ritangle Captain</strong> — Final Stage <span style="color:var(--muted);font-size:0.82rem;">(2022)</span></span>
+            <span><strong>Year 12 Advanced Mathematics Problems Course</strong> — Distinction <span style="color:var(--muted);font-size:0.82rem;">(2023)</span></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Contact</p>
+        <h2 class="section-title">Get in touch</h2>
+      </div>
+      <p style="color: var(--muted); max-width: 440px;">
+        Whether you have a project idea, a question, or just want to say hello —
+        my inbox is always open.
+      </p>
+      <div class="contact-row">
+        <a href="mailto:azeemmalik1025@gmail.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          azeemmalik1025@gmail.com
+        </a>
+        <a href="https://github.com/Azoom123" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          github.com/Azoom123
+        </a>
+        <a href="https://www.linkedin.com/in/azeem-malik-b626a925b/" target="_blank" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          linkedin.com/in/azeem-malik
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 Azeem Malik · Built with HTML &amp; CSS · Hosted on GitHub Pages</p>
+    </div>
+  </footer>
+
+</body>
+</html>
